@@ -38,5 +38,20 @@ namespace Devi.Data.Repositories
         {
             return await _dataContext.Device.ToListAsync();
         }
+
+        void IDevicesRepository.Save(Device device)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDevicesRepository.Delete(Device device)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

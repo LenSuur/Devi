@@ -2,7 +2,7 @@
 
 namespace Devi.Data.Repositories
 {
-    public class IDevicesRepository
+    public interface IDevicesRepository
     {
         Task<Device> Get(int id);
         void Save(Device device);
