@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Devi.Data;
+using Devi.Services;
+using Devi.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DeviContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DeviContext") ?? throw new InvalidOperationException("Connection string 'DeviContext' not found.")));
@@ -8,6 +11,8 @@ builder.Services.AddDbContext<DeviContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 var app = builder.Build();
 
