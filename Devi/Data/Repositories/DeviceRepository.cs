@@ -1,4 +1,6 @@
-﻿using Devi.Models;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Devi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Devi.Data.Repositories
@@ -6,19 +8,32 @@ namespace Devi.Data.Repositories
     public class DeviceRepository : IDeviceRepository
     {
         private readonly DeviContext _dataContext;
+        private readonly IMapper _objectMapper;
 
-        public DeviceRepository(DeviContext dataContext)
+        public DeviceRepository(DeviContext dataContext, IMapper objectMapper)
         {
             _dataContext = dataContext;
+            _objectMapper = objectMapper;
         }        
 
         public async Task<List<Device>> GetAllDevices()
         {
             return await _dataContext.Device.ToListAsync();
         }
-        public async Task<Device> GetDeviceById(int id)
+
+        public async Task<U> Get<U>(int id)
         {
-            return await _dataContext.Device.FindAsync(id);
+            return await _dataContext.Device
+                .Where(device => device.Id == id)
+                .ProjectTo<U>(_objectMapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Device> Get(int id)
+        {
+            return await _dataContext.Device
+                .Where(device => device.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task AddDevice(Device device)

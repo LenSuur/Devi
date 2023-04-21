@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Devi.Data;
 using Devi.Models;
-using Devi.Services;
 
 namespace Devi.Controllers
 {
@@ -27,11 +21,20 @@ namespace Devi.Controllers
             return View(result);
         }
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            var result = await _deviceService.GetDeviceById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            var device = await _deviceService.Get<DeviceModel>(id.Value);
+            if (device == null)
+            {
+                return NotFound();
+            }
 
-            return View(result);
+            return View(device);
         }
 
         [HttpGet]
@@ -41,9 +44,9 @@ namespace Devi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Device device)
+        public async Task<IActionResult> Create(DeviceModel model)
         {
-            await _deviceService.AddDevice(device);
+            await _deviceService.AddDevice(model);
 
             return RedirectToAction("Index");
         }
@@ -51,15 +54,15 @@ namespace Devi.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await _deviceService.GetDeviceById(id);
+            var result = await _deviceService.Get<DeviceModel>(id);
 
             return View(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Device device)
+        public async Task<IActionResult> Edit(DeviceModel model)
         {
-            await _deviceService.UpdateDevice(device);
+            await _deviceService.UpdateDevice(model);
 
             return RedirectToAction("Index");
         }
@@ -67,7 +70,7 @@ namespace Devi.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _deviceService.GetDeviceById(id);
+            var result = await _deviceService.Get<DeviceModel>(id);
 
             return View(result);
         }
