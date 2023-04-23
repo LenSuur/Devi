@@ -46,7 +46,14 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Receipt)
+                @if(item.Receipt != null)
+                {
+                    <img src="check.png" alt="check" style="height:30px; width: 30px;" />
+                }
+                else
+                {
+                    <img src="x.png" alt="X" style="height:30px; width: 30px" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BoughtOn)

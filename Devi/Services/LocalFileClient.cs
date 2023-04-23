@@ -44,6 +44,18 @@ public class LocalFileClient : IFileClient
     public async Task Save(string container, string fileName, Stream inputStream)
     {
         Delete(container, fileName);
+        
+        var containerPath = Path.Combine(RootPath, container);
+        
+        if (!Directory.Exists(RootPath))
+        {
+            Directory.CreateDirectory(RootPath);
+        }
+        
+        if (!Directory.Exists(containerPath))
+        {
+            Directory.CreateDirectory(containerPath);
+        }
 
         var path = GetPath(container, fileName);
         using(var outputStream = new FileStream(path, FileMode.CreateNew))
@@ -52,7 +64,7 @@ public class LocalFileClient : IFileClient
         }
     }
 
-    private string GetPath(string container, string fileName)
+    private static string GetPath(string container, string fileName)
     {
         return Path.Combine(RootPath, container, fileName);
     }
