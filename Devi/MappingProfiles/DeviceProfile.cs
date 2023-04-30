@@ -10,5 +10,6 @@ public class DeviceProfile: Profile
     {
         CreateMap<Device, DeviceModel>();
         CreateMap<DeviceModel, Device>();
+        CreateMap<Device, Device>();
     }
 }

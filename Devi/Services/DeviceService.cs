@@ -50,6 +50,7 @@ namespace Devi.Services
         {
             var device = await _deviceRepository.Get<Device>(model.Id);
             _objectMapper.Map(model, device);
+            device.Id = model.Id;
             await _deviceRepository.UpdateDevice(device);
         }
 

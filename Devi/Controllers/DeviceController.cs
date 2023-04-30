@@ -74,8 +74,21 @@ namespace Devi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(DeviceModel model)
+        public async Task<IActionResult> Edit(DeviceModel model, IFormFile? file)
         {
+            var existingDevice = await _deviceService.Get<Device>(model.Id);
+            if (file != null){
+                await using (var stream = file.OpenReadStream())
+                {
+                    await _fileClient.Delete(FileContainerNames.Receipts, existingDevice.Receipt);
+                    model.Receipt = file.FileName;
+                    await _fileClient.Save(FileContainerNames.Receipts, file.FileName, stream);
+                }
+            }
+            else
+            {
+                model.Receipt = existingDevice.Receipt;
+            }
             await _deviceService.UpdateDevice(model);
 
             return RedirectToAction("Index");
@@ -90,28 +103,19 @@ namespace Devi.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string receipt)
         {
+            var thePath = receipt;
+            if (receipt != null)
+            {
+                await _fileClient.Delete(FileContainerNames.Receipts, receipt);
+            }
+
             await _deviceService.DeleteDevice(id);
 
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SingleFile([FromForm] IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-            {
-                return Content("file not selected");
-            }
-
-            await using (var stream = file.OpenReadStream())
-            {
-                await _fileClient.Save(FileContainerNames.Receipts, file.FileName, stream);
-            }
-
-            return RedirectToAction("Index");
-        }
 
         public async Task<IActionResult> Download(DeviceModel model)
         {

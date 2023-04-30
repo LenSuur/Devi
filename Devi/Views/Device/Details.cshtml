@@ -32,15 +32,15 @@
             @Html.DisplayNameFor(model => model.Receipt)
         </dt>
         <dd class="col-sm-10">
-            @if(Model.Receipt != null)
+            @if (Model.Receipt != null)
             {
                 <a href="@Url.Action("Download", "Device", new { receipt = Model.Receipt })">
-            <img src="/download.png" href="" alt="download" style="height:30px; width: 40px;" />
-            </a>
+                    <img src="/download.png" href="" alt="download" style="height:30px; width: 40px;"/>
+                </a>
             }
             else
             {
-                <img src="/empty.png" alt="Empty" style="height:30px; width: 30px" />
+                <img src="/empty.png" alt="Empty" style="height:30px; width: 30px"/>
             }
         </dd>
         <dt class = "col-sm-2">
