@@ -105,7 +105,6 @@ namespace Devi.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id, string receipt)
         {
-            var thePath = receipt;
             if (receipt != null)
             {
                 await _fileClient.Delete(FileContainerNames.Receipts, receipt);
