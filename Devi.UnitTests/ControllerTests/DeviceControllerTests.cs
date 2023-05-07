@@ -43,7 +43,7 @@ public class DeviceControllerTests
                 Id = 1,
                 DeviceName = "Device 1",
                 SerialNumber = "ABC123",
-                Price = 9.99,
+                Price = (decimal)9.99,
                 Receipt = "receipt1.jpg",
                 BoughtOn = new DateTime(2022, 1, 1),
                 WarrantyTill = new DateTime(2023, 1, 1)
@@ -53,7 +53,7 @@ public class DeviceControllerTests
                 Id = 2,
                 DeviceName = "Device 2",
                 SerialNumber = "DEF456",
-                Price = 19.9,
+                Price = (decimal)19.9,
                 Receipt = "receipt2.jpg",
                 BoughtOn = new DateTime(2022, 2, 1),
                 WarrantyTill = new DateTime(2023, 2, 1)
@@ -203,7 +203,7 @@ public class DeviceControllerTests
             Id = 1,
             DeviceName = "Device 1",
             SerialNumber = "ABC123",
-            Price = 9.99,
+            Price = (decimal)9.99,
             Receipt = "receipt1.jpg",
             BoughtOn = new DateTime(2022, 1, 1),
             WarrantyTill = new DateTime(2023, 1, 1)
@@ -227,7 +227,7 @@ public class DeviceControllerTests
         var model = new DeviceModel { Id = 1,
             DeviceName = "Device 1",
             SerialNumber = "ABC123",
-            Price = 9.99,
+            Price = (decimal)9.99,
             Receipt = "receipt1.jpg",
             BoughtOn = new DateTime(2022, 1, 1),
             WarrantyTill = new DateTime(2023, 1, 1) };
@@ -254,7 +254,7 @@ public class DeviceControllerTests
         var model = new DeviceModel { Id = 1,
             DeviceName = "Device 1",
             SerialNumber = "ABC123",
-            Price = 9.99,
+            Price = (decimal)9.99,
             Receipt = "receipt1.jpg",
             BoughtOn = new DateTime(2022, 1, 1),
             WarrantyTill = new DateTime(2023, 1, 1)  };
@@ -283,7 +283,7 @@ public class DeviceControllerTests
         var model = new DeviceModel { Id = 1,
             DeviceName = "Device 1",
             SerialNumber = "ABC123",
-            Price = 9.99,
+            Price = (decimal)9.99,
             Receipt = "receipt1.jpg",
             BoughtOn = new DateTime(2022, 1, 1),
             WarrantyTill = new DateTime(2023, 1, 1)  };
@@ -316,7 +316,7 @@ public class DeviceControllerTests
         var deviceModel = new DeviceModel { Id = 1,
             DeviceName = "Device 1",
             SerialNumber = "ABC123",
-            Price = 9.99,
+            Price = (decimal)9.99,
             Receipt = "receipt1.jpg",
             BoughtOn = new DateTime(2022, 1, 1),
             WarrantyTill = new DateTime(2023, 1, 1)  };
