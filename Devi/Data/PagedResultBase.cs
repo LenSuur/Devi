@@ -1,5 +1,8 @@
-﻿namespace Devi.Data
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Devi.Data
 {
+    [ExcludeFromCodeCoverage]
     public abstract class PagedResultBase
     {
         public int CurrentPage { get; set; }

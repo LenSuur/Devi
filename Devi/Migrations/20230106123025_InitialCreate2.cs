@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Devi.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class InitialCreate2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -1,5 +1,7 @@
-﻿namespace Devi.Models;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Devi.Models;
+[ExcludeFromCodeCoverage]
 public class DeviceModel
 {
     public int Id { get; set; }

@@ -2,6 +2,7 @@
 
 namespace Devi.Data
 {
+    
     public abstract class Entity
     {
         [Key]

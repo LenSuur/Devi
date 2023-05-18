@@ -1,5 +1,8 @@
-﻿namespace Devi.Services;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Devi.Services;
+
+[ExcludeFromCodeCoverage]
 public static class FileContainerNames
 {
     public const string Receipts = "receipts";
